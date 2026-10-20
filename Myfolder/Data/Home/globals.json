@@ -1,0 +1,291 @@
+{
+  "Globals": {
+    "DuelBonusMaxDiamondCostPercent": 100,
+    "GiftPackExtension": "xmas",
+    "DuelBonusPercentDraw": 0,
+    "DuelBonusLimitWinsPerDay": 3,
+    "DuelLootLimitCooldownInMinutes": 1320,
+    "DuelBonusPercentLose": 0,
+    "DuelBonusPercentWin": 100,
+    "PerformanceTrackerPercent": 100,
+    "CurrentSeasonEndTimestamp": 0,
+    "AllowDistrictFriendlyChallengesDuringRaids": false,
+    "HvAttackStartOfDayOffset": 8,
+    "AllianceNoticeExpireTimeInMinutes": 1440,
+    "AllianceReservationTimeInSeconds": 60,
+    "MaxAllianceNoticeResults": 10,
+    "AllianceNoticeRequestCooldownInSeconds": 10,
+    "AllianceNoticePublishingCostInGold": 10000,
+    "AllianceNoticeUnpublishCooldownInSeconds": 30,
+    "BattlePassTypesIntroductionDate": 1738454400,
+    "ClanProgressEventContributorClanLimit": 100,
+    "ClanRankingTopMembersLimit": 30
+  },
+  "MinVersion": {
+    "BaseVersion": "18.0",
+    "GlobalMinimumVersion": 5,
+    "PlatformMinimumVersions": [
+      {
+        "Platform": "iOS",
+        "MinimumVersion": 0
+      }
+    ]
+  },
+  "KillSwitches": {
+    "AirWardenRetargetingDelay": 800,
+    "WardenGroupRefreshInterval": 1800,
+    "MinRangeForAvoidingWallsInAttackPositionSelection": 1500,
+    "RemoveInvalidBlockingObstacles": true,
+    "EnableFullscreenBoombox": false,
+    "SiegeUnloadMaxTime": 1750,
+    "DynamicFeatureFlags": [
+      {
+        "FeatureFlagName": "SoftMandatory_16_654_1_TrainingPotion",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "SoftMandatory_16_654_1_StuckInWalls",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "ControllableHeroEquipmentUI",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "EnableWatchChallengeReplayButton",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "MovementOverrideForPets",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "ControllableHeroMinimumTouchAreaForTroops",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "NewTos",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "SoftMandatory_16_654_2_LabAssistant",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "SoftMandatory_16_654_2_BuilderAssistant",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "AgeGateResurface",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "AllowSuperTroopsDonation",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "ValidateSaveActiveArmyToPreset",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "SoftMandatory_DoNotAllowUsageOfDeadBBHeroesInStage2",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "FixSiegeLauncherUnits",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "RestoreActiveHeroesOnFailure",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "FixRecurringBAAssignment",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "COC7005_ArmyLoadoutNameFix",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "ProjectileNPEForHookTower",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "SaveSeasonalDefenseManagerToSnapshot",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "magic_17_477_FixCommodityHandlingForFriendlyArmy",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "CapitalSiegeCartFix",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "magic_17_477_FixHookTowerPullsGettingStuckInsideWall",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "EnableFullscreenInbox",
+        "FeatureFlagOn": false
+      },
+      {
+        "FeatureFlagName": "AirSweeperPushBackBugWithTotemSpell",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "BuilderBoostsExpiredWhileOfflineGuardian",
+        "FeatureFlagOn": true
+      },
+      {
+        "FeatureFlagName": "SeasonalDefenseTutorialOnlyResetAtHome",
+        "FeatureFlagOn": true
+      }
+    ],
+    "EnableArmyLoadouts": true,
+    "DestroyProjectilesOnStageComplete": true,
+    "SkipRetargetingIfOldTargetIsValid": true,
+    "EnableWarSignupChatEntry": true,
+    "AlternateAgeGatePath": true,
+    "EnableSceneryEnterAnimations": true,
+    "EnableHardModeForChallenge": true,
+    "EnableHardModeForWar": true,
+    "EnableRewardBoxOpening": true,
+    "AutoRespawnHeroesSeconds": 0,
+    "AbortAttackAtRangeMultiplier": 150
+  },
+  "Village2": {
+    "StrengthRangeForScore": [
+      {
+        "Percentage": 80,
+        "Milestone": 0
+      },
+      {
+        "Percentage": 80,
+        "Milestone": 200
+      },
+      {
+        "Percentage": 100,
+        "Milestone": 400
+      },
+      {
+        "Percentage": 120,
+        "Milestone": 600
+      },
+      {
+        "Percentage": 140,
+        "Milestone": 800
+      },
+      {
+        "Percentage": 160,
+        "Milestone": 1000
+      },
+      {
+        "Percentage": 180,
+        "Milestone": 1200
+      },
+      {
+        "Percentage": 200,
+        "Milestone": 1400
+      },
+      {
+        "Percentage": 400,
+        "Milestone": 1600
+      },
+      {
+        "Percentage": 600,
+        "Milestone": 1800
+      },
+      {
+        "Percentage": 1000,
+        "Milestone": 2000
+      },
+      {
+        "Percentage": 10000,
+        "Milestone": 10000
+      }
+    ],
+    "ScoreChangeForLosing": [
+      {
+        "Percentage": 0,
+        "Milestone": 0
+      },
+      {
+        "Percentage": 30,
+        "Milestone": 400
+      },
+      {
+        "Percentage": 55,
+        "Milestone": 800
+      },
+      {
+        "Percentage": 70,
+        "Milestone": 1200
+      },
+      {
+        "Percentage": 85,
+        "Milestone": 1600
+      },
+      {
+        "Percentage": 95,
+        "Milestone": 2000
+      },
+      {
+        "Percentage": 100,
+        "Milestone": 2400
+      }
+    ]
+  },
+  "RegionalRules": {
+    "AgeRestrictions": [
+      {
+        "Country": "US",
+        "Age": 16
+      },
+      {
+        "Country": "GB",
+        "Age": 16
+      },
+      {
+        "Country": "KR",
+        "Age": 16
+      }
+    ],
+    "GlobalAskAgeTutorial": true,
+    "GlobalAgeRestriction": 16,
+    "ParentalConsent": [
+      {
+        "ConsentUrl": "~~EMPTY~~",
+        "Country": "KR"
+      }
+    ]
+  },
+  "Village1": {
+    "LegendLeagueTrophyChange": [
+      {
+        "Min": 0,
+        "DPPerTrophy": 10
+      },
+      {
+        "Min": 5,
+        "DPPerTrophy": 9
+      },
+      {
+        "Min": 16,
+        "DPPerTrophy": 3
+      },
+      {
+        "Min": 40,
+        "DPPerTrophy": 0
+      }
+    ],
+    "LegendLeagueDailyAttacks": [
+      {
+        "Trophies": 1,
+        "Count": 8
+      }
+    ]
+  }
+}
