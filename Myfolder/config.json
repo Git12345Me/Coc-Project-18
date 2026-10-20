@@ -1,0 +1,19 @@
+{
+    "Server": {
+        "Port": 9339,
+        "Debug": false,
+        "StreamerMode": true,
+        "CaptureUnknownPackets": true,
+        "CaptureAllPackets": true,
+        "Console": true
+    },
+    "Database": {
+        "Enabled": false,
+        "SinglePlayerMode": true,
+        "Host": "127.0.0.1",
+        "Port": 3306,
+        "User": "root",
+        "Password": "",
+        "Name": "bcm"
+    }
+}
