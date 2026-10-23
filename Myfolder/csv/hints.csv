@@ -1,0 +1,5 @@
+"Name","TID","TownHallLevelMin","TownHallLevelMax","VillageType","iOSTID","AndroidTID","HiddenYoungPlayer"
+"String","String","int","int","int","String","String","boolean"
+"welcome message1","TID_LOADING_MESSAGE",1,999,0,,,
+"welcome message2",TID_LOADING_MESSAGE,1,999,-1,,,
+"welcome message3",TID_LOADING_MESSAGE,1,999,1,,,
