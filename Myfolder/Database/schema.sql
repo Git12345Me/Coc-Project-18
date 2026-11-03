@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS players (
   village_ok  LONGTEXT    NULL,                             -- last village that did NOT crash the client (automatic)
   trophies    INT         NOT NULL DEFAULT 0,               -- old system: the league follows from trophy ranges (leagues.csv)
   league_tier INT         NOT NULL DEFAULT 0,               -- new 2025 system: index in league_tiers.csv (0 = Unranked)
+  avatar      LONGTEXT    NULL,                             -- JSON: expLevel, expPoints, gems, duelTrophies, attacksWon, defensesWon (only what you set)
   created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
   updated_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
