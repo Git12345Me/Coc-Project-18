@@ -15,7 +15,7 @@ class ClientHelloMessage extends PiranhaMessage {
   async decode () {}
 
   async process () {
-    if (Database.singlePlayer()) this.client.player = await Database.mainPlayer()
+    if (Database.singlePlayer()) this.client.player = await Database.mainPlayer(this.client)
     await new ServerHelloMessage(this.client).send()
 
     await new LoginOkMessage(this.client).send()

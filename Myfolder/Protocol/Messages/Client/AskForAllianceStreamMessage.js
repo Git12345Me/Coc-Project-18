@@ -12,7 +12,16 @@ class AskForAllianceStreamMessage extends PiranhaMessage {
   async decode () {}
 
   async process () {
-    await new AllianceStreamMessage(this.client).send()
+    const msg = new AllianceStreamMessage(this.client)
+    const a = this.client && this.client.player && this.client.player.alliance
+    if (a) {
+      try {
+        const Database = require('../../../Database')
+        const clan = await Database.getAllianceFull(a.id)
+        if (clan) msg.clan = clan
+      } catch (e) { console.log('[Clan] >> could not read clan ' + a.id + ' from MySQL, sending the sample: ' + e.message) }
+    }
+    await msg.send()
   }
 }
 
