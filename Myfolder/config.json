@@ -5,15 +5,33 @@
         "StreamerMode": true,
         "CaptureUnknownPackets": true,
         "CaptureAllPackets": true,
-        "Console": true
+        "Console": true,
+        "ApplyCommands": true,
+        "AllMissionsDone": true,
+        "MissionsSeenAreDone": true,
+        "TownHallBoostOnce": true,
+        "TownHallBoostSeconds": 10,
+        "InstantUpgrades": true
     },
     "Database": {
-        "Enabled": false,
+        "Enabled": true,
         "SinglePlayerMode": true,
         "Host": "127.0.0.1",
         "Port": 3306,
         "User": "root",
         "Password": "",
-        "Name": "bcm"
+        "Name": "bcm",
+        "AutosaveSeconds": 40,
+        "SaveDebounceMs": 2000
+    },
+    "Content": {
+        "Enabled": true,
+        "StartServer": true,
+        "Port": 8081,
+        "PublicUrl": "http://yourip:8080/",
+        "EventUrlPath": "/event",
+        "Dir": "Data/Content",
+        "ContentUrlPath": "/content",
+        "ForceUpdate": true
     }
 }

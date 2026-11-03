@@ -9,6 +9,7 @@ const Database = require('./Database')
 const Commands = require('./Commands')
 const Capture = require('./Capture')
 const readline = require('readline')
+const ContentServer = require('./Content/ContentServer')
 const server = new net.Server()
 const Messages = new MessageFactory()
 const config = require('./Config')
@@ -48,6 +49,7 @@ async function dispatch (client, message) {
 
 server.on('connection', (client) => {
   client.setNoDelay(true)
+  client.setKeepAlive(true, 30000) // detect dead connections (v9: KeepAlive timer) so the player is saved and released
   client.log = function (text) {
     if (config.Server.Debug && !config.Server.StreamerMode) {
       return console.log(`[${this.remoteAddress.split(':').slice(-1)}] >> ${text}`)
@@ -56,6 +58,7 @@ server.on('connection', (client) => {
   }
 
   client.log('A wild connection appeared!')
+  Commands.lastClient = client // used by the console command  send <id> <hex>
 
   // TCP is a byte stream: one 'data' event can hold half a packet or several packets.
   // Header = id(2) + length(3) + version(2). Collect bytes, cut out complete packets, handle them in order.
@@ -79,6 +82,8 @@ server.on('connection', (client) => {
   })
 
   client.on('end', () => client.log('Client disconnected.'))
+  // 'close' fires for every way a connection can end (normal, reset, timeout, error): write the player to MySQL (v9: Players.Remove)
+  client.on('close', () => { queue = queue.then(() => Database.release(client)).catch(e => console.log('[DB] >> save on disconnect failed:', e.message)) })
 
   client.on('error', (error) => {
     try {
@@ -96,12 +101,26 @@ Database.init()
   .finally(() => {
     server.once('listening', () => console.log(`[SERVER] >> Server started on ${PORT} port!`))
     server.listen(PORT)
+    ContentServer.start()
+    console.log(`[SERVER] >> game actions are saved to MySQL: moves/placing ${config.Server.ApplyCommands ? 'ON' : 'OFF'}, upgrades stored as finished ${config.Server.InstantUpgrades ? 'ON' : 'OFF'} (switch in config.json under "Server")`)
     console.log(`[SERVER] >> Build ${config.BUILD} | packet log (Captures/all.log): ${config.Server.CaptureAllPackets ? 'ON' : 'OFF'} | server commands: ${config.Server.Console !== false ? 'ON' : 'OFF'}`)
     if (config.Server.Console !== false) {
       console.log('[SERVER] >> Type "help" here for server commands.')
       readline.createInterface({ input: process.stdin }).on('line', async (line) => (await Commands.run(line)).forEach(l => console.log(l)))
     }
   })
+
+// Save every online player before the process ends (v9: EventsHandler). Ctrl+C, closing the window and "stop" all end up here.
+let closing = false
+async function shutdown (why) {
+  if (closing) return
+  closing = true
+  console.log(`[SERVER] >> ${why}: saving all players, please wait...`)
+  try { await Database.shutdown() } catch (e) { console.log('[DB] >> shutdown save failed:', e.message) }
+  try { if (Database.pool) await Database.pool.end() } catch (e) { /* closing anyway */ }
+  process.exit(0)
+}
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP', 'SIGBREAK']) process.on(sig, () => shutdown(sig))
 
 process.on('uncaughtException', e => console.log(e))
 process.on('unhandledRejection', e => console.log(e))

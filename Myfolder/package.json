@@ -4,7 +4,8 @@
   "description": "Private server emulator for Clash of Clans 18.0.5 (2025) written on Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "node Tools/VerifyHomeData.js"
+    "test": "node Tools/VerifyHomeData.js && node Tools/TestBattle.js",
+    "test:save": "node Tools/TestSave.js"
   },
   "keywords": [],
   "author": "greedycell",
