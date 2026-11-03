@@ -19,6 +19,7 @@
  * Resources and gems are not part of the village JSON; they are not tracked here.
  */
 const Buildings = require('./BuildingData')
+const Experience = require('./Experience')
 const Turn = require('./Turn')
 const { Grid } = require('./Placement')
 
@@ -38,7 +39,7 @@ function insideAndFree (village, ignore, x, y, w, h) {
 
 /** @returns {{changes:string[], rejected:string[]}} mutates `village` for accepted commands */
 function applyTurn (village, turn, options = {}) {
-  const changes = []; const rejected = []
+  const changes = []; const rejected = []; let xp = 0
   for (const cmd of turn.commands) {
     if (cmd.id === MOVE_BUILDING) {
       if (cmd.fields.length !== 5 || cmd.fields.some(f => typeof f !== 'number')) { rejected.push(`move: unexpected fields ${JSON.stringify(cmd.fields)}`); continue }
@@ -59,6 +60,7 @@ function applyTurn (village, turn, options = {}) {
       if (!info) { rejected.push(`upgrade: building type ${b.data} is not in buildings.csv`); continue }
       if (b.lvl >= info.levels - 1) { rejected.push(`upgrade ${name}: already at the highest level (${b.lvl + 1})`); continue }
       changes.push(`upgraded ${name} (${b.id}) to level ${b.lvl + 2}`)
+      xp += Experience.xpFor(Experience.buildSeconds(b.data, b.lvl + 1)) // the level that is built now
       b.lvl += 1
     } else if (cmd.id === PLACE_BUILDING) {
       const body = Buffer.from(cmd.hex, 'hex'); let pos = 0; const v = []
@@ -77,7 +79,7 @@ function applyTurn (village, turn, options = {}) {
       changes.push(`placed ${info.name} (${id}) at ${x},${y} (it shows as finished after the next login)`)
     }
   }
-  return { changes, rejected }
+  return { changes, rejected, xp }
 }
 
 module.exports = { applyTurn, MOVE_BUILDING, PLACE_BUILDING, UPGRADE_START }

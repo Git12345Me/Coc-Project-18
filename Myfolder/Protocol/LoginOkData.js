@@ -14,13 +14,26 @@ const DEFAULT_HIGH = orig.readInt32BE(0)
 const DEFAULT_LOW = orig.readInt32BE(4)
 const REST = orig.subarray(20 + tokenLen)
 
-function build ({ high = DEFAULT_HIGH, low = DEFAULT_LOW, token = DEFAULT_TOKEN } = {}) {
+const EVENT_URL = 'https://event-assets.clashofclans.com'
+
+// Replace one length-prefixed string (int32 BE length + utf8) inside a buffer
+function swapString (buf, from, to) {
+  const f = Buffer.from(from, 'utf8'); const t = Buffer.from(to, 'utf8')
+  const fl = Buffer.alloc(4); fl.writeUInt32BE(f.length, 0)
+  const tl = Buffer.alloc(4); tl.writeUInt32BE(t.length, 0)
+  const at = buf.indexOf(Buffer.concat([fl, f]))
+  if (at < 0) return buf
+  return Buffer.concat([buf.subarray(0, at), tl, t, buf.subarray(at + 4 + f.length)])
+}
+
+function build ({ high = DEFAULT_HIGH, low = DEFAULT_LOW, token = DEFAULT_TOKEN, eventUrl } = {}) {
   const t = Buffer.from(token, 'utf8')
   const head = Buffer.alloc(16)
   head.writeInt32BE(high, 0); head.writeInt32BE(low, 4)
   head.writeInt32BE(high, 8); head.writeInt32BE(low, 12)
   const len = Buffer.alloc(4); len.writeUInt32BE(t.length, 0)
-  return Buffer.concat([head, len, t, REST])
+  const rest = eventUrl ? swapString(REST, EVENT_URL, eventUrl) : REST
+  return Buffer.concat([head, len, t, rest])
 }
 
 module.exports = { build, DEFAULT_TOKEN, DEFAULT_HIGH, DEFAULT_LOW, ORIGINAL }
